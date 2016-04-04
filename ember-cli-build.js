@@ -20,5 +20,14 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+
+  app.import('vendor/dragula/dragula.js');
+  app.import('vendor/shims/dragula.js', {
+    exports: {
+      'dragula': ['default']
+    }
+  });
+
   return app.toTree();
+
 };

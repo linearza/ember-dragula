@@ -21,27 +21,30 @@
 }
 
 .c_gestures-container{
-  border: 1px solid darken($core-colour, 5%);
+  border: 1px dashed $core-colour;
   padding: 5px;
   @include demo-label('gestures-container');
 }
 
 
 .c_drag-container{
-  border: 1px solid darken($core-colour, 10%);
+  border: 1px solid darken($core-colour, 5%);
   padding: 5px;
   @include demo-label('drag-container');
 }
 
 .c_drag-group{
-  border: 1px solid darken($core-colour, 15%);
+  border: 1px solid darken($core-colour, 10%);
   padding: 5px;
   @include demo-label('drag-group');
+  & + .c_drag-group {
+    margin-top: 10px;
+  }
 }
 
 
 .c_drag-item{
-  border: 1px solid darken($core-colour, 20%);
+  border: 1px solid darken($core-colour, 15%);
   padding: 5px;
   @include demo-label('drag-item');
 }
