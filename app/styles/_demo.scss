@@ -29,14 +29,16 @@
 
 .c_drag-container{
   border: 1px solid darken($core-colour, 5%);
-  padding: 5px;
+  padding: 25px;
   @include demo-label('drag-container');
 }
 
 .c_drag-group{
   border: 1px solid darken($core-colour, 10%);
   padding: 5px;
+  min-height: 30px;
   @include demo-label('drag-group');
+  padding-top: 30px;
   & + .c_drag-group {
     margin-top: 10px;
   }
