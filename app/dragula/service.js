@@ -40,7 +40,7 @@ export default Service.extend({
     removeOnSpill: false,              // spilling will `.remove` the element, if this is true
     mirrorContainer: document.body,    // set the element that gets mirror elements appended
     ignoreInputTextSelection: true,    // allows users to select input text, see details below
-    allowNestedContainers: true       // allows dragging of containers, as in the case of nesting
+    allowNestedContainers: true        // allows dragging of containers, as in the case of nesting
   },
 
   /*
@@ -60,8 +60,10 @@ export default Service.extend({
   },
 
   destroy() {
-    this.get('drake').destroy();
-    this.set('drake', null);
+    if (this.get('drake')) {
+      this.get('drake').destroy();
+      this.set('drake', null);
+    }
   },
 
   drag() {
