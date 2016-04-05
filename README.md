@@ -1,7 +1,8 @@
 # Ember-dragula
 
 ## To Do
-* nested containers
+* ~~nested containers~~
+* coordination between dracula and other gestures
 * scroll on drag
 * drag state styles
 
