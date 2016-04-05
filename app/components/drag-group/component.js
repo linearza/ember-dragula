@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
 const {
-  Component, Logger: { info }, inject: { service }
+  Component, Logger: { info }
 } = Ember;
 
 export default Component.extend({
 
-  classNames: ['c_drag-group', 'drag-container'],
+  classNames: ['c_drag-group'],
 
   attributeBindings: ['data-group'],
   'data-group': 'drag-group',
