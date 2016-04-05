@@ -1,0 +1,78 @@
+$core-colour: #F00F00;
+
+html{
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  font-size: 100%;
+  line-height: 1.5em;
+  height: 100%;
+  background: lighten($core-colour, 45%);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: darken($core-colour, 15%);
+  height: 100%;
+  position: relative;
+  -webkit-touch-callout: none;
+
+  // additional styles
+  box-sizing: border-box;
+  padding: 10px;
+
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
+}
+
+#title{
+  text-align: center;
+}
+
+a {
+  color: darken($core-colour, 10%);
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    color: darken($core-colour, 10%);
+  }
+  &:active {
+    color: $core-colour;
+  }
+}
+
+span{
+  &.center{
+    display:block;
+    text-align: center;
+  }
+}
+
+ul{
+  padding:0;
+  margin: 0;
+  list-style: none;
+}
+
+input{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img{
+  max-width: 100%;
+}
+
+.ember-view{
+  & > .ember-view{
+    background: rgba($core-colour, 0.1);
+  }
+}
+// .application-main{
+//   height: 100%;
+//   @include backface-visibility(hidden);
+// }
