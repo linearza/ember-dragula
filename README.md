@@ -2,6 +2,7 @@
 
 ## To Do
 * ~~nested containers~~
+* activate dragging on press
 * coordination between dracula and other gestures
 * scroll on drag
 * drag state styles
