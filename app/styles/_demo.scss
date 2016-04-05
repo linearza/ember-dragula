@@ -29,7 +29,7 @@
 
 .c_drag-container{
   border: 1px solid darken($core-colour, 5%);
-  padding: 5px;
+  padding: 25px;
   @include demo-label('drag-container');
 }
 

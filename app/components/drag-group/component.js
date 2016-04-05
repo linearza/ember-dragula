@@ -10,17 +10,14 @@ export default Component.extend({
 
   pan() {
     info('drag-group: PAN');
-    return false;
   },
 
   tap() {
     info('drag-group: TAP');
-    return false;
   },
 
   press() {
     info('drag-group: PRESS');
-    return false;
   }
 
 });

@@ -10,17 +10,14 @@ export default Component.extend({
 
   pan() {
     info('drag-item: PAN');
-    return false;
   },
 
   tap() {
     info('drag-item: TAP');
-    return false;
   },
 
   press() {
     info('drag-item: PRESS');
-    return false;
   }
 
 
