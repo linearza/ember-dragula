@@ -22,24 +22,24 @@ export default Service.extend({
 
   options: {
     isContainer: function (el) {
-      // console.log('isContainer', el);
+      console.log('isContainer', el);
       // return el.dataset.group;
       return false; // only elements in drake.containers will be taken into account
     },
     moves: function (el, source, handle, sibling) {
-      // console.log('moves');
+      console.log('moves');
       // console.log('moves', el, source, handle, sibling);
       return true; // elements are always draggable by default
     },
     accepts: function (el, target, source, sibling) {
-      // console.log('accepts', el, target, source, sibling);
+      console.log('accepts', el, target, source, sibling);
       // console.log('accepts', source.dataset.group === target.dataset.group);
       return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
     },
     invalid: function (el, handle) {
-      console.log('invalid');
+      console.log('invalid', 'el', el, 'handle', handle, el !== handle);
 
-      return false; // don't prevent any drags from initiating by default
+      return el !== handle; // don't prevent any drags from initiating by default
     },
     direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
     copy: false,                       // elements are moved by default, not copied

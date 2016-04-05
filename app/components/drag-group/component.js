@@ -6,7 +6,7 @@ const {
 
 export default Component.extend({
 
-  classNames: ['c_drag-group'],
+  classNames: ['c_drag-group', 'drag-container'],
 
   attributeBindings: ['data-group'],
   'data-group': 'drag-group',

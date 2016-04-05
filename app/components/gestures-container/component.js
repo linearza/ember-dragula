@@ -29,8 +29,8 @@ export default Component.extend(RecognizerMixin, {
 
   willInsertElement() { 
     // this.set('dragula.options', {});
-    this.get('dragula.containers').pushObjects(this.$('.c_drag-container').get());
-    this.get('dragula.containers').pushObjects(this.$('.c_drag-group').get());
+    // this.get('dragula.containers').pushObjects(this.$('.c_drag-group').get());
+    this.get('dragula.containers').pushObjects(this.$('.drag-container').get());
 
     console.log(this.get('dragula.containers'));
 
