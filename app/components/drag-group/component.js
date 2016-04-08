@@ -8,8 +8,9 @@ export default Component.extend({
 
   classNames: ['c_drag-group'],
 
-  attributeBindings: ['data-group'],
+  attributeBindings: ['data-group', 'data-draggable'],
   'data-group': 'drag-group',
+  'data-draggable': false,
 
 
   pan() {

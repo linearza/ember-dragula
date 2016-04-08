@@ -7,6 +7,8 @@ const {
 export default Component.extend({
 
   classNames: ['c_drag-item'],
+  attributeBindings: ['data-draggable'],
+  'data-draggable': false,
 
   dragula: service(),
 
@@ -24,8 +26,15 @@ export default Component.extend({
     return false;
   },
 
-  press() {
-    info('drag-item: PRESS');
+  press(e) {
+    info('drag-item: PRESS and ACTIVATE');
+    this.set('data-draggable', true);
+
+    this.get('dragula').lift(e.originalEvent.gesture.srcEvent);
+    // console.log('press', this.get('data-draggable'));
+
+    // this.get('dragula').grab(this.get('element'));
+    // debugger;
     return false;
   }
 

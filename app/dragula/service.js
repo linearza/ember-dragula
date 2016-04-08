@@ -7,8 +7,10 @@ import dragula from 'dragula';
 */
 
 const {
-  Service, Logger: { info }
+  Service, Logger: { info }, run: { later }
 } = Ember;
+
+let _this = this;
 
 export default Service.extend({
 
@@ -20,27 +22,39 @@ export default Service.extend({
 
   containers: Ember.A(),
 
-  options: {
-    isContainer: function (/* el */) {
-      return false; // only elements in drake.containers will be taken into account
-    },
-    moves: function (/* el, source, handle, sibling */) {
-      return true; // elements are always draggable by default
-    },
-    accepts: function (el, target, source /* sibling */) {
-      return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
-    },
-    invalid: function (/*el, handle*/) {
-      return false; // don't prevent any drags from initiating by default
-    },
-    direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
-    copy: false,                       // elements are moved by default, not copied
-    copySortSource: false,             // elements in copy-source containers can be reordered
-    revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
-    removeOnSpill: false,              // spilling will `.remove` the element, if this is true
-    mirrorContainer: document.body,    // set the element that gets mirror elements appended
-    ignoreInputTextSelection: true,    // allows users to select input text, see details below
-    allowNestedContainers: true        // allows dragging of containers, as in the case of nesting
+  options: function() {
+
+    let _this = this;
+
+    return {
+      isContainer: function (/* el */) {
+        return false; // only elements in drake.containers will be taken into account
+      },
+      moves: function (el /*, source, handle, sibling */) {
+        
+        // return true;
+        if (_this.lifted) {
+          console.log('moves');
+          _this.lifted = false;
+          return true;
+        }
+      },
+      accepts: function (el, target, source /* sibling */) {
+        return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
+      },
+      invalid: function (el /* handle */) {
+        return false; // don't prevent any drags from initiating by default
+        // return el.dataset.draggable === 'false';
+      },
+      direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
+      copy: false,                       // elements are moved by default, not copied
+      copySortSource: false,             // elements in copy-source containers can be reordered
+      revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
+      removeOnSpill: false,              // spilling will `.remove` the element, if this is true
+      mirrorContainer: document.body,    // set the element that gets mirror elements appended
+      ignoreInputTextSelection: true,    // allows users to select input text, see details below
+      allowNestedContainers: true        // allows dragging of containers, as in the case of nesting
+    };
   },
 
   /*
@@ -48,7 +62,7 @@ export default Service.extend({
     Nesting and event origin and management is then handled on this service
   */
   setup() {
-    let drake = dragula(this.get('containers'), this.get('options'));
+    let drake = dragula(this.get('containers'), this.options());
 
     drake.on('drag', this.drag.bind(this));
     drake.on('dragend', this.dragEnd.bind(this));
@@ -66,11 +80,48 @@ export default Service.extend({
     }
   },
 
+  lift(e){
+    // this.get('drake').emit('cancel');
+    console.log('manual grab', e);
+    this.set('lifted', true);
+    this.get('drake.lift')(e.target);
+    // this.get('drake.cancel')();
+    // this.get('drake.start')(el);
+    // this.get('drake').emit('grab', e);
+  },
+
+  // activate(e) {
+
+  //   // let evt = e.originalEvent.gesture.srcEvent;
+  //   // this.drake.grab(evt, dragItems[0]);
+  //   // this.get('drake').emit('grab', evt);
+  //   this.set('drake', dragula(this.get('containers'),  { 
+  //     options: { 
+  //       invalid: function() { return false; } 
+  //     } 
+  //   }));
+
+  //   // this.set('drake', dragula(this.get('containers'), this.options()));
+
+  //   // var drake = dragula({ containers: containers });
+  // },
+
   drag() {
     info('dragula:service: DRAG');
   },
 
-  dragEnd(/* el*/) {
+  dragEnd(el) {
+    // this.set('invalid', true);
+
+    el.dataset.draggable = 'false';
+
+    // // this.set('drake', dragula(this.get('containers'), this.options()));
+    // // this.set('currentElement', null);
+    // this.set('drake', dragula({ 
+    //   options: { 
+    //     invalid: function() { return true; } 
+    //   } 
+    // }));
     info('dragula:service: DRAGEND');
   },
 
