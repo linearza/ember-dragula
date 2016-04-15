@@ -6,7 +6,7 @@ import dragula from 'dragula';
   http://haughtcodeworks.com/blog/software-development/bridging-dragula-and-ember/
 */
 
-export default Service.extend({
+export default Ember.Service.extend({
 
   drake: null,
   containers: [],
