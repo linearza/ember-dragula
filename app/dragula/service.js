@@ -6,17 +6,13 @@ import dragula from 'dragula';
   http://haughtcodeworks.com/blog/software-development/bridging-dragula-and-ember/
 */
 
-const {
-  Service, Logger: { info }
-} = Ember;
-
 export default Service.extend({
 
   drake: null,
   containers: [],
 
   options: {
-    isContainer: function ( el ) {
+    isContainer: function ( /* el */ ) {
       return false; // only elements in drake.containers will be taken into account
     },
     moves: function (el, source, handle /*sibling */) {
@@ -29,7 +25,7 @@ export default Service.extend({
     accepts: function (el, target, source /* sibling */) {
       return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
     },
-    invalid: function (el, handle) {
+    invalid: function (/* el, handle  */) {
       return false; // don't prevent any drags from initiating by default
     },
     direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
