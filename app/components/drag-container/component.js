@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 const {
-  Component, Logger: { info }
+  Component, inject: { service }
 } = Ember;
 
 export default Component.extend({
@@ -9,26 +9,30 @@ export default Component.extend({
   classNames: ['c_drag-container'],
 
   attributeBindings: ['data-group'],
-  'data-group': 'drag-container',
+  'data-group': 'c_drag-container',
 
-  pan() {
-    info('drag-container: PAN');
-    return false;
+  dragula: service(),
+  isContainer: true,
+
+  onSort: null,
+
+  willInsertElement() {
+    this.get('dragula').setup();
+    this.get('dragula.drake').on('dragend', this.dragEnd.bind(this));
+
+    if (this.get('isContainer')) {
+      this.get('dragula.containers').pushObjects(this.$().get());
+    }
   },
 
-  panEnd() {
-    info('drag-container: PAN');
-    return false;
+  willDestroyElement() {
+    this.get('dragula').destroy();
   },
 
-  tap() {
-    info('drag-container: TAP');
-    return false;
-  },
-
-  press() {
-    info('drag-container: PRESS');
-    return false;
+  dragEnd: function(){
+    if (this.get('onSort')) {
+      this.get('onSort')(this.$('[data-draggable]').get().mapBy('id'));
+    }
   }
 
 });

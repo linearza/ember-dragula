@@ -13,24 +13,23 @@ const {
 export default Service.extend({
 
   drake: null,
-
-  currentElement: null,
-  siblingElements: null,
-  parentElements: null,
-
-  containers: Ember.A(),
+  containers: [],
 
   options: {
-    isContainer: function (/* el */) {
+    isContainer: function ( el ) {
       return false; // only elements in drake.containers will be taken into account
     },
-    moves: function (/* el, source, handle, sibling */) {
-      return true; // elements are always draggable by default
+    moves: function (el, source, handle /*sibling */) {
+      if (el.dataset.handle) {
+        return handle.classList.contains(el.dataset.handle);
+      } else {
+        return true;
+      }
     },
     accepts: function (el, target, source /* sibling */) {
       return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
     },
-    invalid: function (/*el, handle*/) {
+    invalid: function (el, handle) {
       return false; // don't prevent any drags from initiating by default
     },
     direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
@@ -47,43 +46,27 @@ export default Service.extend({
     Setup and destroy is only done once on top most container
     Nesting and event origin and management is then handled on this service
   */
-  setup() {
-    let drake = dragula(this.get('containers'), this.get('options'));
+  setup(options) {
+    options = options || this.get('options');
+    // this.get('containers').pushObjects(containers);
 
-    drake.on('drag', this.drag.bind(this));
-    drake.on('dragend', this.dragEnd.bind(this));
-    drake.on('drop', this.drop.bind(this));
-    drake.on('over', this.over.bind(this));
-    drake.on('out', this.out.bind(this));
+    let drake = dragula(this.get('containers'), options);
 
     this.set('drake', drake);
   },
+
+  obeserveContainers: function() {
+    if (this.get('drake')) {
+      this.get('drake.containers').pushObjects(this.get('containers'));
+    }
+  }.observes('containers'),
 
   destroy() {
     if (this.get('drake')) {
       this.get('drake').destroy();
       this.set('drake', null);
     }
-  },
-
-  drag() {
-    info('dragula:service: DRAG');
-  },
-
-  dragEnd(/* el*/) {
-    info('dragula:service: DRAGEND');
-  },
-
-  drop(/* el, target, source, sibling */) {
-    info('dragula:service: DROP');
-  },
-
-  over(/* el, container, source */) {
-    info('dragula:service: OVER');
-  },
-
-  out(/* el, container, source */) {
-    info('dragula:service: OUT');
-  },
+  }
 
 });
+

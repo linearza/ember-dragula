@@ -49,4 +49,13 @@
   border: 1px solid darken($core-colour, 15%);
   padding: 5px;
   @include demo-label('drag-item');
+  position: relative;
+  .handle{
+    width: 30px;
+    height: 30px;
+    background: lighten($core-colour, 20%);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 }

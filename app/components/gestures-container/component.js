@@ -21,24 +21,6 @@ export default Component.extend(RecognizerMixin, {
 
   press() {
     info('gestures-container: PRESS');
-  },
-
-  dragula: service(),
-
-  dragulaContainerSelector: '.dragula-container',
-
-  willInsertElement() { 
-    
-    // this.set('dragula.options', {});
-
-    this.get('dragula.containers').pushObjects(this.$('.c_drag-group').get());
-    this.get('dragula.containers').pushObjects(this.$('.c_drag-container').get());
-
-    this.get('dragula').setup();
-  },
-
-  willDestroyElement() {
-    this.get('dragula').destroy();
   }
-
+  
 });

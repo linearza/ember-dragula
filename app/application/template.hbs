@@ -1,31 +1,40 @@
 <h2 id="title">ember-dragula</h2>
 
 {{#gestures-container}}
-
-  {{#drag-container}}
-
-    {{#drag-group}}
-
-      {{#drag-item}}
-        Group 1 - Drag Item 1
+  {{#drag-container onSort=(action 'saveNewOrder')}}
+    {{#each dragItems as |item|}}
+      {{#drag-item id=item.id}}
+        {{item.title}}
       {{/drag-item}}
-
-    {{/drag-group}}
-
-    {{#drag-group}}
-
-      {{#drag-item}}
-        Group 2 - Drag Item 1
-      {{/drag-item}}
-      {{#drag-item}}
-        Group 2 - Drag Item 2
-      {{/drag-item}}
-
-    {{/drag-group}}
-
+    {{/each}}
   {{/drag-container}}
-
 {{/gestures-container}}
+
+
+{{!-- {{#gestures-container}}
+    {{#drag-container}}
+
+      {{#drag-group}}
+
+        {{#drag-item}}
+          Group 1 - Drag Item 1
+        {{/drag-item}}
+
+      {{/drag-group}}
+
+      {{#drag-group}}
+
+        {{#drag-item}}
+          Group 2 - Drag Item 1
+        {{/drag-item}}
+        {{#drag-item}}
+          Group 2 - Drag Item 2
+        {{/drag-item}}
+
+      {{/drag-group}}
+
+    {{/drag-container}}
+{{/gestures-container}} --}}
 
 
 {{outlet}}
