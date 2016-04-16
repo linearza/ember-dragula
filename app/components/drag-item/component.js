@@ -1,33 +1,24 @@
 import Ember from 'ember';
 
 const {
-  Component, Logger: { info }, inject: { service }
+  Component, inject: { service }
 } = Ember;
 
 export default Component.extend({
-
+  
   classNames: ['c_drag-item'],
+  attributeBindings: ['data-draggable', 'data-handle', 'sort-id'],
+  'data-draggable': true,
+  'data-handle': 'handle',
 
   dragula: service(),
 
-  pan() {
-    // debugger;
+  isContainer: false,
 
-    // this.get('dragula.drake.dragging')
-
-    info('drag-item: PAN');
-    return false;
-  },
-
-  tap() {
-    info('drag-item: TAP');
-    return false;
-  },
-
-  press() {
-    info('drag-item: PRESS');
-    return false;
+  willInsertElement() {
+    if (this.get('isContainer')) {
+      this.get('dragula.containers').pushObjects(this.$().get());
+    }
   }
-
 
 });
