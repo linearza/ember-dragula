@@ -2,11 +2,19 @@
 
 {{#gestures-container}}
   {{#drag-container onSort=(action 'saveNewOrder')}}
-    {{#each dragItems as |item|}}
-      {{#drag-item id=item.id}}
-        {{item.title}}
-      {{/drag-item}}
-    {{/each}}
+
+    {{#drag-group}}
+      {{#each dragItems as |item|}}
+        {{#drag-item id=item.id}}
+          {{item.title}}
+        {{/drag-item}}
+      {{/each}}
+    {{/drag-group}}
+
+    {{#drag-group}}
+  
+    {{/drag-group}}
+
   {{/drag-container}}
 {{/gestures-container}}
 
