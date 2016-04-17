@@ -30,7 +30,7 @@ export default Ember. Service.extend({
     accepts: function (el, target, source /* sibling */) {
       return source.dataset.group === target.dataset.group; // elements can be dropped in any of the `containers` by default
     },
-    invalid: function (el, handle) {
+    invalid: function (/*el, handle*/) {
       return false; // don't prevent any drags from initiating by default
     },
     direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
