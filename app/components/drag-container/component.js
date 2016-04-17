@@ -9,7 +9,7 @@ export default Component.extend({
   classNames: ['c_drag-container'],
 
   attributeBindings: ['data-group'],
-  'data-group': 'c_drag-container',
+  'data-group': 'drag-container',
 
   dragula: service(),
   isContainer: true,

@@ -39,6 +39,14 @@
   min-height: 30px;
   @include demo-label('drag-group');
   padding-top: 30px;
+  .handle{
+    width: 30px;
+    height: 24px;
+    background: lighten($core-colour, 20%);
+    position: absolute;
+    right: 5px;
+    top: 3px;
+  }
   & + .c_drag-group {
     margin-top: 10px;
   }

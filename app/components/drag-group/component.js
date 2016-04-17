@@ -1,30 +1,21 @@
 import Ember from 'ember';
 
 const {
-  Component, Logger: { info }
+  Component, inject: { service }
 } = Ember;
 
 export default Component.extend({
 
   classNames: ['c_drag-group'],
 
-  attributeBindings: ['data-group'],
+  attributeBindings: ['data-group', 'data-handle'],
   'data-group': 'drag-group',
+  'data-handle': 'handle',
 
+  dragula: service(),
 
-  pan() {
-    info('drag-group: PAN');
-    return false;
-  },
-
-  tap() {
-    info('drag-group: TAP');
-    return false;
-  },
-
-  press() {
-    info('drag-group: PRESS');
-    return false;
+  willInsertElement() {
+    this.get('dragula.containers').pushObjects(this.$().get());
   }
 
 });
